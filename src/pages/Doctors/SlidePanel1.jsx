@@ -42,7 +42,7 @@ const SlidePanel = () => {
         </div>
         <br />
         <p className="text-xs text-center">Our bot will help you</p>
-        <a className="flex justify-center text-white bg-primaryColor font-medium rounded-md py-2" target="_blank" href="https://mediafiles.botpress.cloud/f08aa14c-8f1f-4ff2-af63-3770c2ce6b47/webchat/bot.html">Book an Appointment</a>
+        <a className="flex justify-center text-white bg-primaryColor font-medium rounded-md py-2" target="_blank" href="https://mediafiles.botpress.cloud/dfc3c656-cea5-4944-bfaa-d53e0d7662da/webchat/bot.html">Book an Appointment</a>
     </div>
   )
 }

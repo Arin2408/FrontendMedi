@@ -3,6 +3,7 @@ import userImg from "../../assets/images/avatar-icon.png";
 import logo from "../../assets/images/logo.png";
 import { NavLink, Link } from "react-router-dom";
 import {BiMenu} from "react-icons/bi";
+import { auth } from "../../firebase";
 
 
 
@@ -30,7 +31,24 @@ const Header = () => {
   const headerRef = useRef(null)
   const menuRef = useRef(null)
 
+  const [user, setUser] = useState(null); // State to hold user data from Firebase
 
+  useEffect(() => {
+    // Firebase listener for user authentication state
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user); // Set user state based on Firebase authentication state
+    });
+
+    return () => unsubscribe(); // Cleanup the listener when the component unmounts
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut(); // Sign out the user using Firebase authentication
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', ()=>{
@@ -82,11 +100,22 @@ const Header = () => {
               </Link>
             </div>
             
-            <Link to="/login">
-              <button
-                className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]"
-              >Login</button>
-            </Link>
+            {user ? (  
+          <button
+            className="bg-red-500 py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        ) : (   
+          <Link to="/login">
+            <button
+              className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]"
+            >
+              Login
+            </button>
+          </Link>
+        )}
             
 
             <span className="md:hidden" onClick={toggleMenu} >

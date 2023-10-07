@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { getAuth, sendEmailVerification } from "firebase/auth";
-import app from "../../firebase";
+import app from "../firebase";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GoogleButton from "react-google-button";
